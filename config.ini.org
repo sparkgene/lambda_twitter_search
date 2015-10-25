@@ -5,8 +5,9 @@ access_token        =
 access_token_secret =
 
 [search]
-keyword = python
-max_tweet = 15
+keyword       = 
+max_tweet     = 15
+last_tweet_id = 0
 
 [slack]
 token =

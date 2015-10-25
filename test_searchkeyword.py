@@ -16,7 +16,8 @@ def main():
         inifile.get('twitter_api', 'access_token'),
         inifile.get('twitter_api', 'access_token_secret'),
         inifile.get('search', 'keyword'),
-        0):
+        long(inifile.get('search', 'last_tweet_id')),
+        int(inifile.get('search', 'max_tweet'))):
 
         print('==========================================================')
         print( "screen_name: {0}".format( tweet['screen_name']) )

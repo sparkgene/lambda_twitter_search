@@ -10,6 +10,7 @@ class SearchKeyword:
         self._results = []
         self._i = 0
 
+        print("since_id: {0}".format(since_id))
         try:
             tso = TwitterSearchOrder()
             tso.set_keywords([keyword])
@@ -17,7 +18,7 @@ class SearchKeyword:
             tso.set_include_entities(False)
             tso.set_count(tweet_count)
             if since_id > 0:
-                tso.set_since_id(since_id)
+                tso.set_since_id(long(since_id))
 
             ts = TwitterSearch(
                 consumer_key = consumer_key,

@@ -15,18 +15,21 @@ def lambda_handler(event, context):
 
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('tweet_id')
-    result = table.scan()
-    previous_last_id = 0
-    for row in result['Items']:
-        if row['last_id'].isdigit():
-            previous_last_id = long(row['last_id'])
+    result = table.get_item(
+        Key={
+            'Id': 1
+        }
+    )
+    previous_last_id = result['Item']['LastId']
 
     last_id = previous_last_id
-    print("last_id: {0}".format(previous_last_id))
-
+    print("previous_last_id: {0}".format(previous_last_id))
     max_send_count = inifile.get('search', 'max_tweet')
     if max_send_count.isdigit():
         max_send_count = int(max_send_count)
+    else:
+        raise TypeError("max_tweet is not numeric")
+
     send_count = 0
     for tweet in SearchKeyword(
         inifile.get('twitter_api', 'consumer_key'),
@@ -36,9 +39,9 @@ def lambda_handler(event, context):
         inifile.get('search', 'keyword'),
         previous_last_id):
 
-        if send_count == 0:
+        if last_id < tweet['id']:
             last_id = tweet['id']
-        elif send_count > max_send_count:
+        if send_count > max_send_count:
             break # sending many tweets to slack takes long time.
         send_count += 1
 
@@ -66,7 +69,8 @@ def lambda_handler(event, context):
                 icon_emoji=inifile.get('slack', 'icon_emoji'))
 
 
+    print("last_id: {0}".format(last_id))
     if last_id > previous_last_id:
         table.put_item(
-            Item={"last_id": last_id }
+            Item={"Id":1, "LastId": last_id}
         )
