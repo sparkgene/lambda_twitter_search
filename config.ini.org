@@ -1,0 +1,16 @@
+[twitter_api]
+consumer_key        =
+consumer_secret     =
+access_token        =
+access_token_secret =
+
+[search]
+keyword = python
+max_tweet = 15
+
+[slack]
+token =
+username = py_bot
+channel =
+icon_url =
+icon_emoji = :slack:

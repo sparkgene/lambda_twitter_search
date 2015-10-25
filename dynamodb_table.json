@@ -1,0 +1,19 @@
+{
+    "AttributeDefinitions": [
+        {
+            "AttributeName": "last_id",
+            "AttributeType": "N"
+        }
+    ],
+    "TableName": "tweet_id",
+    "KeySchema": [
+        {
+            "AttributeName": "last_id",
+            "KeyType": "HASH"
+        }
+    ],
+    "ProvisionedThroughput": {
+        "ReadCapacityUnits": 1,
+        "WriteCapacityUnits": 1
+    }
+}
