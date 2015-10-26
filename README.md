@@ -60,6 +60,7 @@ keyword = lambda
 
 Create a api token. https://api.slack.com/web
 Other keys are based on https://api.slack.com/methods/chat.postMessage
+If post do not appear to your channel, set `channel id` to `channel`.
 
 ## Testing config.ini
 
