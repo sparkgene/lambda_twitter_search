@@ -2,6 +2,7 @@
 import boto3
 import json
 import ConfigParser
+from time import gmtime, strftime
 
 from searchkeyword import SearchKeyword
 from slackclient import SlackClient
@@ -9,7 +10,7 @@ from slackclient import SlackClient
 print('Loading function')
 
 def lambda_handler(event, context):
-
+    print(strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime()))
     inifile = ConfigParser.SafeConfigParser()
     inifile.read("./config.ini")
 
