@@ -5,7 +5,7 @@ access_token        =
 access_token_secret =
 
 [search]
-keyword       = 
+keyword       =
 max_tweet     = 15
 last_tweet_id = 0
 
@@ -15,3 +15,7 @@ username = py_bot
 channel =
 icon_url =
 icon_emoji = :slack:
+
+[dynamodb]
+table_id = lambda_ids
+id_value = 1

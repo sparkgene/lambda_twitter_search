@@ -83,18 +83,18 @@ python test_searchkeyword.py
 
   ``` shell
   # create table
-  aws dynamodb create-table --table-name tweet_id --attribute-definitions AttributeName=Id,AttributeType=N --key-schema AttributeName=Id,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+  aws dynamodb create-table --table-name lambda_ids --attribute-definitions AttributeName=Id,AttributeType=N --key-schema AttributeName=Id,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 
   # insert default value
-  aws dynamodb put-item --table-name tweet_id --item '{"Id":{"N":"1"},"LastId":{"N":"0"}}'
+  aws dynamodb put-item --table-name lambda_ids --item '{"Id":{"N":"1"},"LastId":{"N":"0"}, "source": {"S":"twitter"}}'
 
   # confirm data is insert correct.
-  aws dynamodb get-item --table-name tweet_id --key '{"Id":{"N":"1"}}'
+  aws dynamodb get-item --table-name lambda_ids --key '{"Id":{"N":"1"}}'
   ```
 3. Pack function
 
   ``` shell
-  zip -r func.zip .
+  zip -r func.zip . -x .git/**/*
   ```
   details
   http://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html

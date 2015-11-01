@@ -15,10 +15,11 @@ def lambda_handler(event, context):
     inifile.read("./config.ini")
 
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('tweet_id')
+    table = dynamodb.Table(inifile.get('dynamodb', 'table_id'))
+    key_id = int(inifile.get('dynamodb', 'id_value'))
     result = table.get_item(
         Key={
-            'Id': 1
+            'Id': key_id
         }
     )
     previous_last_id = result['Item']['LastId']
@@ -63,15 +64,15 @@ def lambda_handler(event, context):
                 "color": "#439FE0"
             }
         ]
-        sc.api_call("chat.postMessage",
+        res = sc.api_call("chat.postMessage",
                 channel=inifile.get('slack', 'channel'),
                 attachments=json.dumps(attachments),
                 username=inifile.get('slack', 'username'),
                 icon_emoji=inifile.get('slack', 'icon_emoji'))
-
+        print(res)
 
     print("last_id: {0}".format(last_id))
     if last_id > previous_last_id:
         table.put_item(
-            Item={"Id":1, "LastId": last_id}
+            Item={"Id":key_id, "LastId": last_id}
         )
