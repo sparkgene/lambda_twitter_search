@@ -105,5 +105,7 @@ python test_searchkeyword.py
 ## Caution
 
 Using this scripts on AWS is not free.
+
 [Amazon DynamoDB Pricing](https://aws.amazon.com/dynamodb/pricing/)
+
 [AWS Lambda Pricing](https://aws.amazon.com/lambda/pricing/)
