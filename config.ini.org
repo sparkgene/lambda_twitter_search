@@ -19,3 +19,4 @@ icon_emoji = :slack:
 [dynamodb]
 table_id = lambda_ids
 id_value = 1
+source = lambda_twitter_search

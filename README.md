@@ -40,6 +40,11 @@ username = py_bot # name shown on slack message
 channel = # tweet post channel
 icon_url = # costom icon for slack message
 icon_emoji = :slack: # use icon. this overrides icon_url.
+
+[dynamodb]
+table_id = lambda_ids
+id_value = 1
+source = lambda_twitter_search
 ```
 
 ### twitter_api section
@@ -86,7 +91,7 @@ python test_searchkeyword.py
   aws dynamodb create-table --table-name lambda_ids --attribute-definitions AttributeName=Id,AttributeType=N --key-schema AttributeName=Id,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 
   # insert default value
-  aws dynamodb put-item --table-name lambda_ids --item '{"Id":{"N":"1"},"LastId":{"N":"0"}, "source": {"S":"twitter"}}'
+  aws dynamodb put-item --table-name lambda_ids --item '{"Id":{"N":"1"},"LastId":{"N":"0"}, "source": {"S":"lambda_twitter_search"}}'
 
   # confirm data is insert correct.
   aws dynamodb get-item --table-name lambda_ids --key '{"Id":{"N":"1"}}'

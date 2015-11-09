@@ -74,5 +74,8 @@ def lambda_handler(event, context):
     print("last_id: {0}".format(last_id))
     if last_id > previous_last_id:
         table.put_item(
-            Item={"Id":key_id, "LastId": last_id}
+            Item={
+                "Id":key_id,
+                "LastId": last_id,
+                "source": inifile.get('dynamodb', 'source')}
         )
