@@ -67,6 +67,11 @@ Create a api token. https://api.slack.com/web
 Other keys are based on https://api.slack.com/methods/chat.postMessage
 If post do not appear to your channel, set `channel id` to `channel`.
 
+### dynamodb section
+
+This schema is same with [lambda_review_checker](https://github.com/sparkgene/lambda_review_checker).
+If you use both lambda function, change the `id_value` to be unique.
+
 ## Testing config.ini
 
 Test the slack configuration with following command.
